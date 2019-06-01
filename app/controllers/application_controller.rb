@@ -18,7 +18,7 @@ class ApplicationController < Sinatra::Base
 
   post "/signup" do
     #your code here
-    if !!params[:username] && !!params[:password]
+    if user.username == "" || user.password == ""
 			redirect '/failure'
 		else
       User.create(username: params[:username], password: params[:password])
@@ -39,7 +39,6 @@ class ApplicationController < Sinatra::Base
   post "/login" do
     ##your code here
     user = User.find_by(username: params[:username], password: params[:password])
-
     if user
       redirect '/account'
     else
